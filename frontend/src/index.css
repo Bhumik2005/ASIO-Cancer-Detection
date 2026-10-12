@@ -1,0 +1,10 @@
+/* Reset default Vite styles to allow full Bootstrap widescreen layout */
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-color: #0f172a;
+}

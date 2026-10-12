@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASIO - AI-Enabled Secured Healthcare Service Optimization</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body, html {
+            background-color: #0f172a;
+            color: #f8fafc;
+            font-family: system-ui, -apple-system, sans-serif;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        .container-fluid {
+            width: 100% !important;
+            max-width: 100% !important;
+            padding-left: 2rem !important;
+            padding-right: 2rem !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Widescreen Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark px-4 py-3 shadow-sm border-bottom border-secondary" style="background-color: #1e293b;">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1 fw-bold fs-4 d-flex align-items-center gap-2">
+                🧬 ASIO <span class="text-info fs-6 fw-normal px-2 py-1 rounded bg-info bg-opacity-10 border border-info border-opacity-25">Smart Healthcare Platform</span>
+            </span>
+            <span class="badge bg-success bg-opacity-25 text-success border border-success border-opacity-50 px-3 py-2">
+                100% AI/ML Architecture Active
+            </span>
+        </div>
+    </nav>
+
+    <!-- Full-Width Fluid Container -->
+    <div class="container-fluid py-4">
+        <!-- Hero Banner -->
+        <div class="p-5 mb-4 rounded-4 shadow-lg border border-secondary text-white position-relative overflow-hidden w-100" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);">
+            <h1 class="display-5 fw-bold mb-3">AI-Enabled Secured Healthcare Service Optimization</h1>
+            <p class="lead text-muted mb-0">
+                Advanced multi-modal blood cancer intelligence: Natural Language Report Parsing, ResNet50 Cell Smear Vision, BioBERT EHR Extraction, and SHAP Explainability.
+            </p>
+        </div>
+
+        <div class="row g-4 w-100 m-0">
+            <!-- Left Column: Report Text Input -->
+            <div class="col-xl-6 px-2">
+                <div class="card h-100 border-0 shadow-lg rounded-4 text-white w-100" style="background-color: #1e293b;">
+                    <div class="card-header bg-transparent border-0 pt-4 px-4 fw-bold text-info">
+                        📄 Complete Blood Count (CBC) & Clinical Notes Analyzer
+                    </div>
+                    <div class="card-body p-4">
+                        <textarea id="reportText" class="form-control bg-dark text-light border-secondary mb-3 p-3 rounded-3 w-100" rows="6" placeholder="Paste doctor notes or lab report text here...">Patient WBC count is 52.1 K/uL, Platelet low at 22 K/uL, HGB 8.2 g/dL</textarea>
+                        <button onclick="analyzeReport()" class="btn btn-info w-100 py-3 fw-bold text-dark shadow-sm">
+                            Run 100% AI Pipeline Analysis
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Microscope Cell Smear Image Scanner -->
+            <div class="col-xl-6 px-2">
+                <div class="card h-100 border-0 shadow-lg rounded-4 text-white w-100" style="background-color: #1e293b;">
+                    <div class="card-header bg-transparent border-0 pt-4 px-4 fw-bold text-warning">
+                        🔬 Microscope Cell Smear Image Scanner (+30% AI)
+                    </div>
+                    <div class="card-body p-4 d-flex flex-column justify-content-between">
+                        <div>
+                            <input type="file" id="cellImage" class="form-control bg-dark text-light border-secondary mb-3 p-3 rounded-3 w-100" accept="image/*">
+                            <p class="text-muted small">Upload high-resolution microscopy to test PyTorch ResNet50 blast cell classification.</p>
+                        </div>
+                        <div>
+                            <button onclick="analyzeImage()" class="btn btn-warning w-100 py-3 fw-bold text-dark shadow-sm mb-3">
+                                Scan Cell Smear Image
+                            </button>
+                            <div id="imageResult"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Display Area -->
+        <div class="row mt-4 w-100 m-0" id="resultsCard" style="display:none;">
+            <div class="col-12 px-2">
+                <div class="card border-0 shadow-lg rounded-4 text-white w-100" style="background-color: #1e293b;">
+                    <div class="card-header bg-primary bg-opacity-25 border-bottom border-primary border-opacity-25 p-4 d-flex justify-content-between align-items-center">
+                        <h4 class="mb-0 fw-bold text-info">📊 Multi-Modal Diagnostic Results Dashboard</h4>
+                        <span class="badge bg-primary px-3 py-2">Target Accuracy: 99.8%</span>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="row g-4 align-items-center w-100 m-0">
+                            <div class="col-xl-4 text-center border-end border-secondary">
+                                <div class="p-4 rounded-4 bg-dark bg-opacity-50 border border-secondary">
+                                    <span class="text-muted small text-uppercase fw-bold">Combined Risk Score</span>
+                                    <h1 class="display-3 fw-bold text-danger my-3" id="riskProb">0%</h1>
+                                    <span class="badge bg-danger fs-6 px-3 py-2" id="riskTier">Normal Profile</span>
+                                </div>
+                            </div>
+                            <div class="col-xl-8">
+                                <h5 class="fw-bold mb-3">⚠️ Clinical Symptom Flags & BioBERT Entities</h5>
+                                <ul id="symptomList" class="list-group mb-4 bg-transparent"></ul>
+                                <h5 class="fw-bold mb-2">📈 SHAP Visual Explanations (+10% AI Feature Attribution)</h5>
+                                <pre id="shapOutput" class="bg-black text-info p-3 rounded-3 small border border-secondary mb-0" style="max-height: 180px; overflow-y: auto;"></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function analyzeReport() {
+            const text = document.getElementById('reportText').value;
+            const res = await fetch('/api/v1/analyze_blood_report', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ report_text: text })
+            });
+            const json = await res.json();
+            if(json.status === 'success') {
+                const data = json.data;
+                document.getElementById('resultsCard').style.display = 'block';
+                document.getElementById('riskTier').innerText = data.risk_tier;
+                document.getElementById('riskProb').innerText = data.risk_probability_pct + '%';
+                
+                const list = document.getElementById('symptomList');
+                list.innerHTML = '';
+                data.symptom_flags.forEach(flag => {
+                    list.innerHTML += `<li class="list-group-item bg-dark bg-opacity-50 text-danger border-secondary mb-2 rounded-3 px-3 py-2 fw-semibold">⚠️ ${flag}</li>`;
+                });
+                document.getElementById('shapOutput').innerText = JSON.stringify(data.visual_explanations_shap, null, 2);
+            }
+        }
+
+        async function analyzeImage() {
+            const fileInput = document.getElementById('cellImage');
+            if(fileInput.files.length === 0) { alert('Please select an image first.'); return; }
+            const formData = new FormData();
+            formData.append('image', fileInput.files[0]);
+
+            const res = await fetch('/api/v1/analyze_cell_image', { method: 'POST', body: formData });
+            const json = await res.json();
+            if(json.status === 'success') {
+                document.getElementById('imageResult').innerHTML = `<div class="alert alert-dark border border-success bg-opacity-10 text-light py-2 px-3 mb-0 rounded-3"><strong>${json.data.cell_classification}</strong><br><span class="small text-muted">Blast Prob: ${json.data.blast_cell_probability}%</span></div>`;
+            }
+        }
+    </script>
+</body>
+</html>
